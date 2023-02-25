@@ -165,6 +165,7 @@
             this.btn_insert.TabIndex = 14;
             this.btn_insert.Text = "Insert Metadata";
             this.btn_insert.UseVisualStyleBackColor = true;
+            this.btn_insert.Click += new System.EventHandler(this.btn_insert_Click);
             // 
             // btn_view
             // 
@@ -184,6 +185,7 @@
             this.btn_edit.TabIndex = 16;
             this.btn_edit.Text = "Edit Metadata";
             this.btn_edit.UseVisualStyleBackColor = true;
+            this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
             // 
             // label7
             // 
