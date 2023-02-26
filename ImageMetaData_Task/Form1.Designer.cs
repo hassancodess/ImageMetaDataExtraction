@@ -46,6 +46,7 @@
             this.btn_edit = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lv_metadate = new System.Windows.Forms.ListView();
+            this.btn_postImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -206,11 +207,22 @@
             this.lv_metadate.UseCompatibleStateImageBehavior = false;
             this.lv_metadate.View = System.Windows.Forms.View.List;
             // 
+            // btn_postImage
+            // 
+            this.btn_postImage.Location = new System.Drawing.Point(15, 230);
+            this.btn_postImage.Name = "btn_postImage";
+            this.btn_postImage.Size = new System.Drawing.Size(172, 23);
+            this.btn_postImage.TabIndex = 19;
+            this.btn_postImage.Text = "Post Image";
+            this.btn_postImage.UseVisualStyleBackColor = true;
+            this.btn_postImage.Click += new System.EventHandler(this.btn_postImage_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_postImage);
             this.Controls.Add(this.lv_metadate);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btn_edit);
@@ -257,6 +269,7 @@
         private System.Windows.Forms.Button btn_edit;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListView lv_metadate;
+        private System.Windows.Forms.Button btn_postImage;
     }
 }
 

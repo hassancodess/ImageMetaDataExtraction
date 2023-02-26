@@ -13,17 +13,22 @@ using System.Windows.Forms;
 using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
 using MetadataExtractor.IO;
-//using System.Drawing.Imaging;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using MetadataExtractor.Formats.Jpeg;
 using ExifLibrary;
+using MetadataExtractor.Formats.Jpeg;
+using ImageMagick;
+
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Net.Mime.MediaTypeNames;
+using System.Security.Policy;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace ImageMetaData_Task
 {
     public partial class Form1 : Form
     {
         public string filePath;
-        public string output = "C:\\Users\\Hassan\\Desktop";
+        public string output = "C:\\Users\\Hassan\\Desktop\\output.jpg";
         public Form1()
         {
             InitializeComponent();
@@ -62,22 +67,24 @@ namespace ImageMetaData_Task
 
         private void btn_insert_Click(object sender, EventArgs e)
         {
-            //Values
-            //string people = txt_people.Text;
-            //string events = txt_event.Text;
-            ////float lat = float.Parse(txt_lat.Text);
-            //float lng = float.Parse(txt_long.Text);
-            //DateTime date = dtp.Value;
+
             try
             {
-                var file = ImageFile.FromFile(filePath);
-                // note the explicit cast to ushort
-                file.Properties.Set(ExifTag.UserComment, "Amna & Hassan");
-                file.Save($"{output}/newImage.jpg");
+                using (MagickImage image = new MagickImage(filePath))
+                {
+                    var profile = new ExifProfile();
+                    profile.SetValue(ImageMagick.ExifTag.Copyright, "Dirk Lemstrajgjggfgfghfghf");
+
+                    image.SetProfile(profile);
+                    pictureBox.Image = null;
+
+                    image.Write(filePath);
+
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"ERROR - {ex.Message}" );
+                MessageBox.Show(ex.Message);
             }
 
 
@@ -85,16 +92,54 @@ namespace ImageMetaData_Task
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
+            //try
+            //{
+            //    using (var image = ImageFile.FromFile(filePath))
+            //    {
+            //        var file = ImageFile.FromFile(filePath);
+            //        // note the explicit cast to ushort
+            //        //file.SetPropertyItem
+            //        file.Properties.Set(ExifTag.UserComment, "AMNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            //        file.Save(filePath);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"ERROR - {ex.Message}");
+            //}
+        }
+
+        private async void btn_postImage_Click(object sender, EventArgs e)
+        {
             try
             {
-                var file = ImageFile.FromFile(filePath);
-                // note the explicit cast to ushort
-                file.Properties.Set(ExifTag.UserComment, "AMNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                file.Save($"{output}/newImages.jpg");
+                using (var client = new HttpClient())
+                {
+                    // TODO: Set the base URL of your Web API
+                    client.BaseAddress = new Uri("http://192.168.100.80/ImageMetaDataAPI/");
+
+                    // TODO: Add any required headers (such as authentication headers)
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    // TODO: Create a new instance of the MultipartFormDataContent class to add the file to the request
+                    var content = new MultipartFormDataContent();
+
+                    // TODO: Add the file to the request
+                    var fileContent = new ByteArrayContent(File.ReadAllBytes(filePath));
+                    //fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                    content.Add(fileContent, "image", "image.jpeg");
+
+                    // TODO: Send the request to the Web API
+                    HttpResponseMessage response = await client.PostAsync("api/image/addimage", content);
+
+                    MessageBox.Show("Uploaded");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"ERROR - {ex.Message}");
+                MessageBox.Show(ex.Message);
             }
         }
     }
