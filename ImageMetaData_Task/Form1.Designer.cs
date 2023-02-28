@@ -47,6 +47,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lv_metadate = new System.Windows.Forms.ListView();
             this.btn_postImage = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@
             // 
             // pictureBox
             // 
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Location = new System.Drawing.Point(12, 25);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(172, 160);
@@ -70,7 +72,7 @@
             // 
             // btn_chooseImage
             // 
-            this.btn_chooseImage.Location = new System.Drawing.Point(12, 201);
+            this.btn_chooseImage.Location = new System.Drawing.Point(14, 201);
             this.btn_chooseImage.Name = "btn_chooseImage";
             this.btn_chooseImage.Size = new System.Drawing.Size(172, 23);
             this.btn_chooseImage.TabIndex = 2;
@@ -80,15 +82,15 @@
             // 
             // txt_people
             // 
-            this.txt_people.Location = new System.Drawing.Point(58, 261);
+            this.txt_people.Location = new System.Drawing.Point(58, 296);
             this.txt_people.Name = "txt_people";
-            this.txt_people.Size = new System.Drawing.Size(126, 20);
+            this.txt_people.Size = new System.Drawing.Size(143, 20);
             this.txt_people.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 264);
+            this.label2.Location = new System.Drawing.Point(12, 299);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 4;
@@ -97,7 +99,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 301);
+            this.label3.Location = new System.Drawing.Point(12, 336);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 6;
@@ -105,15 +107,15 @@
             // 
             // txt_event
             // 
-            this.txt_event.Location = new System.Drawing.Point(58, 298);
+            this.txt_event.Location = new System.Drawing.Point(58, 333);
             this.txt_event.Name = "txt_event";
-            this.txt_event.Size = new System.Drawing.Size(126, 20);
+            this.txt_event.Size = new System.Drawing.Size(143, 20);
             this.txt_event.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 346);
+            this.label4.Location = new System.Drawing.Point(9, 371);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(22, 13);
             this.label4.TabIndex = 8;
@@ -121,7 +123,7 @@
             // 
             // txt_lat
             // 
-            this.txt_lat.Location = new System.Drawing.Point(58, 343);
+            this.txt_lat.Location = new System.Drawing.Point(55, 368);
             this.txt_lat.Name = "txt_lat";
             this.txt_lat.Size = new System.Drawing.Size(77, 20);
             this.txt_lat.TabIndex = 7;
@@ -129,7 +131,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(151, 349);
+            this.label5.Location = new System.Drawing.Point(148, 374);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 10;
@@ -137,7 +139,7 @@
             // 
             // txt_long
             // 
-            this.txt_long.Location = new System.Drawing.Point(197, 346);
+            this.txt_long.Location = new System.Drawing.Point(194, 371);
             this.txt_long.Name = "txt_long";
             this.txt_long.Size = new System.Drawing.Size(77, 20);
             this.txt_long.TabIndex = 9;
@@ -145,7 +147,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 388);
+            this.label6.Location = new System.Drawing.Point(9, 412);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 12;
@@ -153,7 +155,7 @@
             // 
             // dtp
             // 
-            this.dtp.Location = new System.Drawing.Point(58, 382);
+            this.dtp.Location = new System.Drawing.Point(55, 406);
             this.dtp.Name = "dtp";
             this.dtp.Size = new System.Drawing.Size(200, 20);
             this.dtp.TabIndex = 13;
@@ -217,11 +219,23 @@
             this.btn_postImage.UseVisualStyleBackColor = true;
             this.btn_postImage.Click += new System.EventHandler(this.btn_postImage_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(329, 412);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(442, 30);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Open Form 2";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_postImage);
             this.Controls.Add(this.lv_metadate);
             this.Controls.Add(this.label7);
@@ -270,6 +284,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListView lv_metadate;
         private System.Windows.Forms.Button btn_postImage;
+        private System.Windows.Forms.Button button1;
     }
 }
 

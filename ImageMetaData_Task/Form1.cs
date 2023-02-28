@@ -28,7 +28,9 @@ namespace ImageMetaData_Task
     public partial class Form1 : Form
     {
         public string filePath;
-        public string output = "C:\\Users\\Hassan\\Desktop\\output.jpg";
+        public string output = "C:\\Users\\Hassan\\Desktop\\images";
+        public string outputImageName;
+        public string outputFilePath;
         public Form1()
         {
             InitializeComponent();
@@ -76,9 +78,12 @@ namespace ImageMetaData_Task
                     profile.SetValue(ImageMagick.ExifTag.Copyright, "Dirk Lemstrajgjggfgfghfghf");
 
                     image.SetProfile(profile);
-                    pictureBox.Image = null;
 
-                    image.Write(filePath);
+                    outputImageName = filePath.Split('\\').Last();
+                    outputFilePath = $"{output}/{outputImageName}";
+
+                    image.Write(outputFilePath);
+                    MessageBox.Show("Metadata Inserted & New Image Created on Desktop/images");
 
                 }
             }
@@ -116,7 +121,7 @@ namespace ImageMetaData_Task
                 using (var client = new HttpClient())
                 {
                     // TODO: Set the base URL of your Web API
-                    client.BaseAddress = new Uri("http://192.168.100.80/ImageMetaDataAPI/");
+                    client.BaseAddress = new Uri($"{BaseURL.BASE_URL}/ImageMetaDataAPI/");
 
                     // TODO: Add any required headers (such as authentication headers)
                     client.DefaultRequestHeaders.Accept.Clear();
@@ -126,10 +131,10 @@ namespace ImageMetaData_Task
                     var content = new MultipartFormDataContent();
 
                     // TODO: Add the file to the request
-                    var fileContent = new ByteArrayContent(File.ReadAllBytes(filePath));
+                    var fileContent = new ByteArrayContent(File.ReadAllBytes(outputFilePath));
                     //fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
                     fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-                    content.Add(fileContent, "image", "image.jpeg");
+                    content.Add(fileContent, "image", outputImageName);
 
                     // TODO: Send the request to the Web API
                     HttpResponseMessage response = await client.PostAsync("api/image/addimage", content);
@@ -141,6 +146,13 @@ namespace ImageMetaData_Task
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form2 = new Form2();
+            form2.Show();
+            this.Hide();
         }
     }
 }
