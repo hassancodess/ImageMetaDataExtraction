@@ -37,6 +37,7 @@ namespace ImageMetaData_Task
 
         private async void btn_getAllImageNames_Click(object sender, EventArgs e)
         {
+            lv_imageNames.Clear();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri($"{BaseURL.BASE_URL}/ImageMetaDataAPI/");

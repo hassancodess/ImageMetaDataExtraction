@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using System.Text.Json;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Linq;
@@ -16,12 +17,12 @@ using MetadataExtractor.IO;
 using ExifLibrary;
 using MetadataExtractor.Formats.Jpeg;
 using ImageMagick;
-
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Net.Mime.MediaTypeNames;
 using System.Security.Policy;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace ImageMetaData_Task
 {
@@ -75,7 +76,35 @@ namespace ImageMetaData_Task
                 using (MagickImage image = new MagickImage(filePath))
                 {
                     var profile = new ExifProfile();
-                    profile.SetValue(ImageMagick.ExifTag.Copyright, "Dirk Lemstrajgjggfgfghfghf");
+
+                    List<string> people = new List<string>() { "amna", "hassan" };
+                    List<string> events = new List<string>() { "Gala Spring 22", "Amna Birthday" };
+                    var jsonObject = new
+                    {
+                        people,
+                        events,
+                    };
+                    // Convert the object to JSON
+                    string jsonString = System.Text.Json.JsonSerializer.Serialize(jsonObject);
+
+                    ImageMagick.Rational[] latitude = new ImageMagick.Rational[] {
+                        new ImageMagick.Rational(33, 1),
+                        new ImageMagick.Rational(35, 1),
+                        new ImageMagick.Rational(16, 1)
+                    };
+                    ImageMagick.Rational[] longitude = new ImageMagick.Rational[] {
+                        new ImageMagick.Rational(73, 1),
+                        new ImageMagick.Rational(4, 1),
+                        new ImageMagick.Rational(51, 1)
+                    };
+                    profile.SetValue(ImageMagick.ExifTag.Copyright, jsonString);
+                    profile.SetValue(ImageMagick.ExifTag.Artist, "Hassan n Amna");
+                    profile.SetValue(ImageMagick.ExifTag.UserComment, Encoding.UTF8.GetBytes("User Comment"));
+                    profile.SetValue(ImageMagick.ExifTag.GPSLongitudeRef, "W");
+                    profile.SetValue(ImageMagick.ExifTag.GPSLatitude, latitude);
+                    profile.SetValue(ImageMagick.ExifTag.GPSLatitudeRef, "N");
+                    profile.SetValue(ImageMagick.ExifTag.GPSLongitude, latitude);
+                    profile.SetValue(ImageMagick.ExifTag.GPSLongitudeRef, "E");
 
                     image.SetProfile(profile);
 
